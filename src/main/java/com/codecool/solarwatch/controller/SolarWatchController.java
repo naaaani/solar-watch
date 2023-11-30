@@ -1,8 +1,8 @@
 package com.codecool.solarwatch.controller;
 
-import com.codecool.solarwatch.geocodingAPI.model.CityReport;
+import com.codecool.solarwatch.geocodingAPI.model.City;
 import com.codecool.solarwatch.geocodingAPI.service.DirectGeocodingService;
-import com.codecool.solarwatch.sunriseSunsetAPI.model.SunriseSunsetRecord;
+import com.codecool.solarwatch.sunriseSunsetAPI.model.SunriseSunsetDTO;
 import com.codecool.solarwatch.sunriseSunsetAPI.service.SunriseSunsetService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +31,8 @@ public class SolarWatchController {
             date = LocalDate.now();
         }
 
-        CityReport cityCoordinates = geocodingService.getCityCoordinates(city);
-        SunriseSunsetRecord sunriseSunset = sunriseSunsetService.getSunriseSunset(cityCoordinates, date);
+        City cityCoordinates = geocodingService.getCity(city);
+        SunriseSunsetDTO sunriseSunset = sunriseSunsetService.getSunriseSunset(cityCoordinates, date);
 
         return ResponseEntity.ok(sunriseSunset);
     }
